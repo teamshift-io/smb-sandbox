@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "smb-sandbox: a realistic fictional small business for testing AI agents"
+message: "If you use smb-sandbox in research or publications, please cite it as below."
+type: software
+authors:
+  - name: "TeamShift"
+    website: "https://teamshift.io"
+repository-code: "https://github.com/teamshift-io/smb-sandbox"
+url: "https://teamshift.io/open-source/smb-sandbox"
+license: Apache-2.0
+keywords:
+  - synthetic data
+  - ai agents
+  - agent evaluation
+  - model context protocol
+  - small business
+version: "0.1.0"
+date-released: "2026-10-03"

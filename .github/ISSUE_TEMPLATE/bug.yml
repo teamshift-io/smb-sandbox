@@ -1,0 +1,15 @@
+name: Bug report
+description: Something generated or behaved incorrectly
+labels: [bug]
+body:
+  - type: input
+    id: command
+    attributes: { label: Command or code, description: "e.g. npx @teamshift/fake-business --industry dental-clinic --seed 7" }
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes: { label: What happened vs what you expected }
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes: { label: Package version and Node version }

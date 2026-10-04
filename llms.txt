@@ -1,0 +1,17 @@
+# smb-sandbox
+
+> smb-sandbox is an open-source, fully fictional small business for testing AI agents: a deterministic dataset generator (@teamshift/fake-business), mock CRM/inbox/calendar/invoicing/phone MCP servers (@teamshift/sandbox-mcp), and 10 verified business tasks graded on end state (@teamshift/smb-workflows). Apache-2.0, by TeamShift (https://teamshift.io).
+
+All data is fictional: `.example` email domains, 555-01xx phone numbers, invented names. Industries: home-services, dental-clinic, marketing-agency. Same seed produces byte-identical output.
+
+## Packages
+
+- [fake-business](https://github.com/teamshift-io/smb-sandbox/tree/main/packages/fake-business): generate a coherent fictional business with linked records and 11 kinds of labeled operational mess; exports JSON, NDJSON, CSV, SQL, HubSpot- and QuickBooks-shaped CSVs.
+- [sandbox-mcp](https://github.com/teamshift-io/smb-sandbox/tree/main/packages/sandbox-mcp): 46 Model Context Protocol tools over that business; validated writes, audit log, outbox instead of real email/SMS; stdio or Streamable HTTP.
+- [smb-workflows](https://github.com/teamshift-io/smb-sandbox/tree/main/workflows): quote follow-up, missed-call callback, overdue invoice reminders, duplicate contact cleanup, payment matching, reschedule propagation, stale deal next actions, speed to lead, invoice/job mismatch, daily owner brief; each with prompt, verifier and reference solution.
+
+## Docs
+
+- [Evaluate an agent with Claude Code](https://github.com/teamshift-io/smb-sandbox/blob/main/workflows/docs/run-with-claude-code.md)
+- [Contributing: add an industry or task](https://github.com/teamshift-io/smb-sandbox/blob/main/CONTRIBUTING.md)
+- [Project page](https://teamshift.io/open-source/smb-sandbox)

@@ -1,0 +1,11 @@
+name: New industry or scenario
+description: Propose an industry, a kind of realistic mess, or a workflow task
+labels: [enhancement, good first issue]
+body:
+  - type: input
+    id: industry
+    attributes: { label: Industry or scenario, description: "e.g. landscaping, veterinary clinic, 'customer pays the wrong invoice'" }
+    validations: { required: true }
+  - type: textarea
+    id: realism
+    attributes: { label: What makes it realistic?, description: Typical services, pricing, roles, the messy situations that actually happen }

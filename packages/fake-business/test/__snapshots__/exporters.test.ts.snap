@@ -1,0 +1,48 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`summary > is stable for a fixed seed 1`] = `
+"Copper Kettle Plumbing & Air — home-services, seed 42
+2025-10-01 → 2026-09-30 · America/Chicago · Birchford, MN
+
+Records
+  employees                       10
+  customers                       40
+  contacts                        54
+  leads                           38
+  deals                           33
+  quotes                          10
+  jobs                            50
+  invoices                        40
+  payments                        38
+  messages                       238
+  calls                           68
+  tasks                           74
+  events                         778
+  anomalies                       22
+
+Money
+  invoiced                  $52,026.00
+  payments received         $42,209.00
+  outstanding (A/R)         $10,304.00
+  open pipeline             $19,408.00
+  deals won / lost / open    24 / 5 / 4
+
+Schedule
+  jobs in progress                 0
+  upcoming, next 14 days          10
+  upcoming, later                  0
+
+Anomalies (22, $37,771.00 at risk)
+  duplicate-contact                2
+  quote-not-followed-up            2
+  missed-call-no-callback          2
+  stale-deal                       2
+  overdue-invoice                  2
+  invoice-wrong-job                2
+  reschedule-not-propagated        2
+  missing-contact-info             2
+  conflicting-status               2
+  unmatched-payment                2
+  lead-never-contacted             2
+"
+`;

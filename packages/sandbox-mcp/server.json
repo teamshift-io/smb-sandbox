@@ -1,0 +1,46 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.teamshift-io/sandbox-mcp",
+  "title": "SMB Sandbox",
+  "description": "Mock small-business CRM, inbox, calendar, invoicing and phone tools for testing AI agents safely.",
+  "websiteUrl": "https://teamshift.io/open-source/smb-sandbox",
+  "repository": {
+    "url": "https://github.com/teamshift-io/smb-sandbox",
+    "source": "github",
+    "subfolder": "packages/sandbox-mcp"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@teamshift/sandbox-mcp",
+      "version": "0.1.0",
+      "transport": { "type": "stdio" },
+      "packageArguments": [
+        {
+          "type": "named",
+          "name": "--industry",
+          "description": "Fictional company type to generate.",
+          "default": "home-services",
+          "choices": ["home-services", "dental-clinic", "marketing-agency"],
+          "isRequired": false
+        },
+        {
+          "type": "named",
+          "name": "--seed",
+          "description": "Generator seed; the same seed always yields the same company.",
+          "default": "42",
+          "format": "number",
+          "isRequired": false
+        },
+        {
+          "type": "named",
+          "name": "--toolsets",
+          "description": "Comma list of crm,inbox,calendar,invoicing,phone,admin (default all).",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}

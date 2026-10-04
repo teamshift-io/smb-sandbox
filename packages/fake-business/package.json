@@ -1,0 +1,62 @@
+{
+  "name": "@teamshift/fake-business",
+  "version": "0.1.0",
+  "description": "Generate a realistic, fully fictional small business — CRM, quotes, jobs, invoices, emails, calls and an event timeline with labeled mess — for testing AI agents, integrations, demos and CRMs.",
+  "keywords": [
+    "synthetic data",
+    "fake data",
+    "test data",
+    "ai agents",
+    "crm",
+    "small business",
+    "mcp",
+    "llm evaluation",
+    "mock data",
+    "data generator",
+    "seed data"
+  ],
+  "license": "Apache-2.0",
+  "author": "TeamShift (https://teamshift.io)",
+  "homepage": "https://teamshift.io/open-source/smb-sandbox",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teamshift-io/smb-sandbox.git",
+    "directory": "packages/fake-business"
+  },
+  "bugs": {
+    "url": "https://github.com/teamshift-io/smb-sandbox/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "fake-business": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.2.0"
+  }
+}

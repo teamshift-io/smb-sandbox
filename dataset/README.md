@@ -29,4 +29,4 @@ Deliberate, labeled anomalies include invoice/job mismatches and conflicting sta
 
 `fake-business --list-companies` lists the stable IDs; `fake-business --company company-001` regenerates an entry. The library configurations opt into 36 months and calibration without changing `generate()` defaults. Do not combine a library ID with generation overrides.
 
-License: the repository's Apache-2.0 license. Publication on Hugging Face and a Zenodo DOI are separate acceptance steps; this card does not claim either has completed.
+License: the repository's Apache-2.0 license. The reviewed 100-company archive is published on [Zenodo](https://doi.org/10.5281/zenodo.23226098) as `library-v1`; its SHA-256 is `038a982f87ed115ad6e271229c13240cf95e2c576d1280649b4dbecdb23069ad`. Use [the dataset citation](CITATION.cff) for that deposit. The repository-root citation remains the software's `0.1.0` citation. Hugging Face publication remains a separate, unfinished acceptance step.

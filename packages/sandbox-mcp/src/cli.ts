@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
-import type { Dataset, GenerateOptions, IndustryId } from "@teamshift/fake-business";
+import { INDUSTRIES, type Dataset, type GenerateOptions, type IndustryId } from "@teamshift/fake-business";
 import { buildStateFile, createSandboxServer, TOOLSETS, type SandboxServerOptions, type Toolset } from "./server.js";
 import { SandboxStore } from "./store.js";
 import { VERSION } from "./version.js";
@@ -15,7 +15,7 @@ const HELP = `sandbox-mcp ${VERSION} — mock small-business MCP servers over a 
 Usage: sandbox-mcp [options]
 
 Data:
-  --industry <id>        home-services | dental-clinic | marketing-agency (default home-services)
+  --industry <id>        ${INDUSTRIES.map((industry) => industry.id).join(" | ")} (default home-services)
   --seed <n>             Generator seed (default 42)
   --size <s>             small | medium | large (default medium)
   --messiness <x>        Anomaly multiplier, 0 disables (default 1)
@@ -50,7 +50,7 @@ async function loadDataset(values: Record<string, string | boolean | undefined>)
     }
   }
   const industry = (values.industry as string | undefined) ?? "home-services";
-  if (!["home-services", "dental-clinic", "marketing-agency"].includes(industry)) die(`unknown --industry "${industry}"`);
+  if (!INDUSTRIES.some((profile) => profile.id === industry)) die(`unknown --industry "${industry}"`);
   const seed = Number(values.seed ?? 42);
   if (!Number.isInteger(seed)) die("--seed must be an integer");
   const opts: GenerateOptions = { industry: industry as IndustryId, seed };

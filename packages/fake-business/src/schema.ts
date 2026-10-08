@@ -1,3 +1,4 @@
+import type { Calibration } from "./calibration.js";
 /**
  * The data contract shared by every package in smb-sandbox.
  *
@@ -15,7 +16,7 @@
 
 export const SCHEMA_VERSION = "1.0.0";
 
-export type IndustryId = "home-services" | "dental-clinic" | "marketing-agency";
+export type IndustryId = "home-services" | "dental-clinic" | "marketing-agency" | "trailer-dealer";
 
 export type Iso = string;
 export type IsoDate = string;
@@ -51,6 +52,8 @@ export interface DatasetMeta {
   asOf: IsoDate;
   /** Always true. Every name, email, phone and address is fictional. */
   synthetic: true;
+  /** Optional measured aggregate references; events remain synthetic. */
+  calibration?: Calibration;
 }
 
 export interface Company {
@@ -359,6 +362,8 @@ export interface Anomaly {
 export interface GenerateOptions {
   industry: IndustryId;
   seed: number;
+  /** Opt in to source-bound medium staffing; legacy defaults remain unchanged. */
+  calibrated?: boolean;
   /** Scale factor; 1 ≈ 40 customers and ~12 months of history. */
   size?: "small" | "medium" | "large";
   /** Simulated "today". Defaults to 2026-09-30 so output is reproducible. */

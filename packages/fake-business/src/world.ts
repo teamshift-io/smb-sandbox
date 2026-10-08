@@ -380,6 +380,20 @@ export class Chain {
     return this.w.P.customerKind === "household" && contact.phone !== null;
   }
 
+  /** Preserve legacy fixtures; calibrated libraries require an available crew. */
+  private availableStart(start: number, duration: number, crewIds: readonly string[], ignoreId?: string): number {
+    if (!this.w.plan.enforceStaffAvailability) return start;
+    for (let attempts = 0; attempts < 3650; attempts++) {
+      const begin = this.w.iso(start);
+      const end = this.w.iso(start + duration);
+      const busy = this.w.d.jobs.some((job) => job.id !== ignoreId && job.status !== "canceled" && job.status !== "no-show" &&
+        job.scheduledStart < end && job.scheduledEnd > begin && job.assigneeIds.some((id) => crewIds.includes(id)));
+      if (!busy) return start;
+      start = this.clock.nextOpenDay(dayStart(start) + DAY) + (start - dayStart(start));
+    }
+    throw new RangeError("No available crew slot within ten years");
+  }
+
   /** Book a job: creates the job, the assignee's task and a confirmation. */
   scheduleJob(o: {
     t: number;
@@ -395,6 +409,9 @@ export class Chain {
   }): ScheduledJob {
     const { w, rng } = this;
     const P = w.P;
+    const duration = o.end - o.start;
+    const start = this.availableStart(o.start, duration, o.crew.map((employee) => employee.id));
+    o = { ...o, start, end: start + duration };
     const job: Job = {
       id: w.ids.next("job"),
       customerId: o.customer.id,
@@ -452,7 +469,8 @@ export class Chain {
     const { w } = this;
     const oldStart = sj.start;
     const newDay = this.clock.addBusinessDays(oldStart, shiftDays, this.rng);
-    const newStart = dayStart(newDay) + (oldStart - dayStart(oldStart));
+    const requestedStart = dayStart(newDay) + (oldStart - dayStart(oldStart));
+    const newStart = this.availableStart(requestedStart, sj.end - sj.start, sj.job.assigneeIds, sj.job.id);
     const newEnd = newStart + (sj.end - sj.start);
     const from = sj.job.scheduledStart;
     sj.start = newStart;

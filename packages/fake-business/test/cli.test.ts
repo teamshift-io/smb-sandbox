@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { generate, toJSON } from "../src/index.js";
+import { generate, generateCompany, toJSON } from "../src/index.js";
 import { formatSummary } from "../src/summary.js";
 
 const cli = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
@@ -34,6 +34,14 @@ describe.skipIf(!existsSync(cli))("cli (dist)", () => {
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
+  });
+
+  it("loads the three-year library and rejects ambiguous overrides", () => {
+    expect(run("--company", "company-001").stdout).toBe(toJSON(generateCompany("company-001")));
+    expect(run("--list-companies").stdout.trim().split("\n")).toHaveLength(100);
+    expect(run("--company", "unknown").status).toBe(2);
+    expect(run("--company", "company-001", "--seed", "1").status).toBe(2);
+    expect(JSON.parse(run("--calibrated").stdout).meta.calibration.cbp.year).toBe(2023);
   });
 
   it("lists industries, shows help and rejects bad input", () => {

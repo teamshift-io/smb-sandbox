@@ -2,6 +2,7 @@ import type { IndustryId } from "../schema.js";
 import { dentalClinic } from "./dental-clinic.js";
 import { homeServices } from "./home-services.js";
 import { marketingAgency } from "./marketing-agency.js";
+import { trailerDealer } from "./trailer-dealer.js";
 import type { IndustryProfile } from "./types.js";
 
 /** Every industry is one profile file; add yours here. */
@@ -9,6 +10,7 @@ export const PROFILES: Readonly<Record<IndustryId, IndustryProfile>> = {
   "home-services": homeServices,
   "dental-clinic": dentalClinic,
   "marketing-agency": marketingAgency,
+  "trailer-dealer": trailerDealer,
 };
 
 export interface IndustryInfo {

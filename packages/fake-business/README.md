@@ -284,3 +284,24 @@ Apache-2.0
 ---
 
 Built by [TeamShift](https://teamshift.io/open-source/smb-sandbox?utm_source=github&utm_medium=readme) — AI workers for small-business operations.
+
+## Three-year company library and validation
+
+The source release includes 100 stable ready-made company configurations across four industries, including `trailer-dealer`. Existing `generate()` defaults stay unchanged. The library opts into source-bound medium staffing and records Census CBP/SUSB and BLS OEWS reference vintage, calculations and proxy limitations in `meta.calibration`.
+
+```ts
+import { generateCompany, checkInvariants, buildLedger, checkLedger,
+  buildInventory, checkInventory, checkFictionalNames } from "@teamshift/fake-business";
+
+const company = generateCompany("company-004");
+const defects = checkInvariants(company); // includes deliberately injected invoice/job defects
+const ledger = buildLedger(company);
+const ledgerDefects = checkLedger(ledger);
+const stock = buildInventory(company); // completed trailer sales only
+const stockDefects = checkInventory(stock);
+const possibleNameMatches = checkFictionalNames(company, ["A name from your review registry"]);
+```
+
+CLI: `fake-business --list-companies`, `fake-business --company company-004`, or `fake-business --calibrated` for opt-in medium staffing. Library IDs reject generation overrides. Calibrated scheduling checks crew availability when booking and rescheduling; legacy default fixtures are retained.
+
+After building this workspace, `node scripts/export-library.mjs <output-directory>` exports all 100 compressed company files plus a SHA-256 manifest and generated-name registry. The [dataset card](../../dataset/README.md) explains modeled accounting/inventory, source limits and permitted uses. Neither fuzzy name screening nor invented names establish real-business or trademark clearance. GitHub artifacts, npm package versions, Hugging Face publication and a Zenodo DOI each require their own publication evidence.

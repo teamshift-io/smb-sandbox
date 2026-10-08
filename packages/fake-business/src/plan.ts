@@ -79,6 +79,7 @@ export type ChainSpec =
   | { kind: "ahead"; start: number; dayOffset: number };
 
 export interface Plan {
+  enforceStaffAvailability: boolean;
   P: IndustryProfile;
   seed: number;
   size: Size;
@@ -226,6 +227,7 @@ function pickTags(rng: Rng, tags: readonly string[]): string[] {
 }
 
 export interface PlanInput {
+  enforceStaffAvailability?: boolean;
   P: IndustryProfile;
   seed: number;
   size: Size;
@@ -424,6 +426,7 @@ export function makePlan(input: PlanInput): Plan {
   for (let i = 0; i < input.spareCount; i++) spares.push(makeCustomerPeople().person);
 
   return {
+    enforceStaffAvailability: input.enforceStaffAvailability ?? false,
     P,
     seed,
     size,

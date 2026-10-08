@@ -11,6 +11,7 @@ import {
   toSQL,
 } from "./exporters/index.js";
 import { DEFAULT_AS_OF, GENERATOR_VERSION, generate } from "./generate.js";
+import { COMPANY_LIBRARY, generateCompany } from "./library.js";
 import { INDUSTRIES } from "./industries/index.js";
 import type { GenerateOptions, IndustryId } from "./schema.js";
 import { formatSummary } from "./summary.js";
@@ -33,6 +34,9 @@ Options
   --format <f>        ${FORMATS.join(" | ")}  (default json)
   --out <path>        file for json/ndjson/sql, directory for csv/hubspot/quickbooks
   --summary           print a short human summary instead of data (or as well, with --out)
+  --calibrated        opt in to measured aggregate medium staffing with source metadata
+  --company <id>      load a ready-made calibrated three-year company (no generation overrides)
+  --list-companies    list the 100 ready-made company IDs and industries
   --list-industries   list available industries and exit
   -h, --help          show this help
   -v, --version       print version
@@ -89,6 +93,9 @@ function main(argv: string[]): number {
       out: { type: "string", short: "o" },
       summary: { type: "boolean" },
       "list-industries": { type: "boolean" },
+      calibrated: { type: "boolean" },
+      company: { type: "string" },
+      "list-companies": { type: "boolean" },
       help: { type: "boolean", short: "h" },
       version: { type: "boolean", short: "v" },
     },
@@ -107,6 +114,14 @@ function main(argv: string[]): number {
       process.stdout.write(`${i.id.padEnd(18)} ${i.description}\n${"".padEnd(18)} offerings: ${i.offerings.join(", ")}\n`);
     }
     return 0;
+  }
+
+  if (values["list-companies"]) {
+    for (const entry of COMPANY_LIBRARY) process.stdout.write(`${entry.id} ${entry.options.industry} ${entry.options.months} months\n`);
+    return 0;
+  }
+  if (values.company && (["industry", "seed", "size", "as-of", "months", "messiness", "calibrated"] as const).some((key) => values[key] !== undefined)) {
+    throw new UsageError("--company cannot be combined with generation overrides");
   }
 
   const industry = (values.industry ?? "home-services") as IndustryId;
@@ -128,10 +143,11 @@ function main(argv: string[]): number {
     asOf: values["as-of"] ?? DEFAULT_AS_OF,
     months: int("months", values.months, 12),
     messiness,
+    ...(values.calibrated ? { calibrated: true } : {}),
   };
   let data: ReturnType<typeof generate>;
   try {
-    data = generate(opts);
+    data = values.company ? generateCompany(values.company) : generate(opts);
   } catch (e) {
     throw new UsageError((e as Error).message);
   }

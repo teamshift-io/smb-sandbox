@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "TeamShift SMB Sandbox Three-Year Company Library"
+message: "Cite this dataset deposit separately from the smb-sandbox software."
+type: dataset
+authors:
+  - name: "TeamShift"
+    website: "https://teamshift.io"
+doi: "10.5281/zenodo.23226098"
+url: "https://zenodo.org/records/23226098"
+repository-code: "https://github.com/teamshift-io/smb-sandbox"
+license: Apache-2.0
+version: "library-v1"
+date-released: "2026-10-08"
+keywords:
+  - synthetic data
+  - small business
+  - agent evaluation

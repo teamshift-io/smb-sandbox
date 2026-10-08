@@ -1,0 +1,6 @@
+{
+  "name": "@teamshift/smb-bench", "version": "0.1.0", "private": true,
+  "type": "module", "scripts": {"build":"tsup", "test":"vitest run", "typecheck":"tsc --noEmit"},
+  "dependencies": {"@modelcontextprotocol/sdk":"^1.32.0", "@teamshift/fake-business":"workspace:*", "@teamshift/sandbox-mcp":"workspace:*", "@teamshift/smb-workflows":"workspace:*"},
+  "devDependencies": {"@types/node":"^22.0.0", "tsup":"^8.3.0", "typescript":"^5.6.0", "vitest":"^3.2.0"}
+}

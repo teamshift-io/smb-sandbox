@@ -1,3 +1,4 @@
+import { CALIBRATION, calibratedProfile } from "./calibration.js";
 import { injectPostAnomalies, type Quotas } from "./anomalies.js";
 import { runChain } from "./chains.js";
 import { PROFILES } from "./industries/index.js";
@@ -31,6 +32,7 @@ interface Resolved {
   asOf: string;
   months: number;
   messiness: number;
+  calibrated: boolean;
 }
 
 function resolve(opts: GenerateOptions): Resolved {
@@ -47,7 +49,8 @@ function resolve(opts: GenerateOptions): Resolved {
   if (!Number.isInteger(months) || months < 1 || months > 120) throw new RangeError(`months must be an integer from 1 to 120, got ${String(months)}`);
   const messiness = opts.messiness ?? 1;
   if (!Number.isFinite(messiness) || messiness < 0 || messiness > 10) throw new RangeError(`messiness must be between 0 and 10, got ${String(messiness)}`);
-  return { industry: opts.industry, seed: opts.seed, size, asOf, months, messiness };
+  if (opts.calibrated !== undefined && typeof opts.calibrated !== "boolean") throw new TypeError("calibrated must be boolean");
+  return { industry: opts.industry, seed: opts.seed, size, asOf, months, messiness, calibrated: opts.calibrated ?? false };
 }
 
 function quotasFor(r: Resolved): Quotas {
@@ -164,6 +167,7 @@ function finalize(w: World, plan: Plan, r: Resolved): Dataset {
       startDate: plan.startDate,
       asOf: r.asOf,
       synthetic: true,
+      ...(r.calibrated ? { calibration: structuredClone(CALIBRATION[r.industry]) } : {}),
     },
     company: w.company,
     employees: d.employees,
@@ -189,9 +193,10 @@ function finalize(w: World, plan: Plan, r: Resolved): Dataset {
  */
 export function generate(opts: GenerateOptions): Dataset {
   const r = resolve(opts);
-  const P = PROFILES[r.industry];
+  const P = r.calibrated ? calibratedProfile(PROFILES[r.industry]) : PROFILES[r.industry];
   const quotas = quotasFor(r);
   const plan = makePlan({
+    enforceStaffAvailability: r.calibrated,
     P,
     seed: r.seed,
     size: r.size,

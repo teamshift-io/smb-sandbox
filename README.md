@@ -88,3 +88,7 @@ Apache-2.0. All generated data is fictional and free to use, modify and publish.
 ---
 
 Built by [TeamShift](https://teamshift.io/open-source/smb-sandbox?utm_source=github&utm_medium=readme) — AI workers for small-business operations.
+
+## Three-year library
+
+The generator now exposes 100 stable three-year company configurations, a trailer-dealer archetype, opt-in source-bound staffing, invariant checks, an illustrative double-entry ledger and trailer-stock movements. See the [generator guide](packages/fake-business/README.md) and [dataset card](dataset/README.md). Build locally, then export with `node scripts/export-library.mjs <output-directory>`. Publication at a dataset host and a DOI are separate from repository availability.

@@ -11,6 +11,21 @@ const cli = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
 
 // Spawns the built CLI; run `pnpm build` first (the root `build` precedes `test`).
 describe.skipIf(!existsSync(cli))("sandbox-mcp CLI over stdio", () => {
+  it("serves a generated trailer dealer through the native MCP contract", async () => {
+    const transport = new StdioClientTransport({ command: process.execPath, args: [cli, "--industry", "trailer-dealer", "--seed", "42"], stderr: "pipe" });
+    const client = new Client({ name: "trailer-cli-test", version: "1.0.0" });
+    try {
+      await client.connect(transport);
+      const response = await client.callTool({ name: "invoicing_list_invoices", arguments: {} });
+      expect(response.isError).toBeFalsy();
+      const invoices = JSON.parse((response.content as Array<{ text: string }>)[0]!.text).items;
+      expect(invoices.length).toBeGreaterThan(0);
+      expect(JSON.stringify(invoices)).toMatch(/trailer|hitch|brake/i);
+    } finally {
+      await client.close();
+    }
+  });
+
   it("serves tools, applies writes and saves state", async () => {
     const dir = mkdtempSync(join(tmpdir(), "sandbox-mcp-"));
     const data = join(dir, "dataset.json");

@@ -26,7 +26,7 @@ the same way: the untouched company fails and the reference solution scores 1.0.
 
 | Template | Category | Checks | No-op shaped reward |
 |---|---|---:|---:|
-| quote-follow-up | dispatch | 17 | 0.53 |
+| quote-follow-up | collections | 17 | 0.53 |
 | missed-call-callback | dispatch | 14 | 0.86 |
 | overdue-invoice-reminders | collections | 19 | 0.58 |
 | dedupe-contacts | dispatch | 15 | 0.60 |
@@ -80,8 +80,8 @@ It needs an evaluator's own model admission and budget, and none are included he
 No customer or tenant data from TeamShift or anyone else enters the generator, the tasks or the
 sample. Checked on the committed sample (`samples/episodes/episodes.jsonl`, 26 episodes):
 
-- all 15 email addresses are on `.example` or `.invalid` domains
-- all 13 phone numbers are 555-01xx
+- every email address (15 occurrences, 9 distinct) is on a `.example` or `.invalid` domain
+- every phone number (13 occurrences, 9 distinct) is 555-01xx
 - it contains no URLs
 
 The public seeds are published, so they cannot serve as held-out data. A private held-out split

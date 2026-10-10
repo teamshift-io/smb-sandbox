@@ -19,7 +19,7 @@ if (!outArg || !Number.isInteger(perTemplate) || perTemplate < 1) {
 const out = resolve(outArg);
 await mkdir(out, { recursive: false });
 
-// The licensed scope covers three industries; trailer-dealer companies stay out of the sample.
+// Trailer-dealer companies stay out of the sample.
 const EXCLUDED_INDUSTRIES = new Set(["trailer-dealer"]);
 const taken = {};
 const cases = [];

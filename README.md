@@ -4,7 +4,7 @@
 
 Agents that look great in a demo often fall apart on a real company's messy data: a duplicate contact, a quote nobody followed up on, a payment that doesn't match any invoice. You can't safely test against real customers, and random fake rows don't have those problems. smb-sandbox gives you a believable company that does, with every problem labeled so you can measure whether your agent fixed it.
 
-![license](https://img.shields.io/badge/license-Apache--2.0-blue) ![node](https://img.shields.io/badge/node-%3E%3D20-green) ![data](https://img.shields.io/badge/data-100%25%20fictional-brightgreen)
+![license](https://img.shields.io/badge/license-Apache--2.0-blue) ![node](https://img.shields.io/badge/node-%3E%3D20-green) ![data](https://img.shields.io/badge/data-100%25%20fictional-brightgreen) [![M8ven Score](https://m8ven.ai/badge/mcp/teamshift-io/smb-sandbox)](https://m8ven.ai/mcp/teamshift-io/smb-sandbox?s=readme)
 
 ## What's inside
 

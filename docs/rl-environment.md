@@ -57,8 +57,8 @@ node scripts/export-episodes.mjs ./episodes-all 25   # every in-scope case
 ```
 
 The script writes `episodes.jsonl` and `SHA256SUMS` into a new directory. Each line holds one
-episode: the case and template, industry, prompt, every state-changing tool call the policy made
-(from the audit log, which doesn't record reads), and the reward with the grader's named checks.
+episode: the case and template, industry, prompt, every write the policy attempted, rejected ones
+included (from the audit log, which doesn't record reads), and the reward with the grader's named checks.
 The two scripted policies are `noop` and `reference`. Output is byte-identical across runs.
 [`samples/episodes/`](../samples/episodes) holds the one-per-template export.
 

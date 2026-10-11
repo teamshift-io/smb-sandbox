@@ -59,7 +59,7 @@ for (const { task, dataset, workflow, checksum } of cases) {
   }
 }
 const body = episodes.map((e) => JSON.stringify(e)).join("\n") + "\n";
-// Created only after every episode graded as expected, so a failed run leaves nothing behind.
+// Created only after every episode graded as expected, so a failed grade leaves no empty directory.
 await mkdir(out, { recursive: false });
 await writeFile(join(out, "episodes.jsonl"), body, { flag: "wx" });
 await writeFile(join(out, "SHA256SUMS"), `${createHash("sha256").update(body).digest("hex")}  episodes.jsonl\n`, { flag: "wx" });

@@ -91,4 +91,4 @@ Built by [TeamShift](https://teamshift.io/open-source/smb-sandbox?utm_source=git
 
 ## Three-year library
 
-The generator now exposes 100 stable three-year company configurations, a trailer-dealer archetype, opt-in source-bound staffing, invariant checks, an illustrative double-entry ledger and trailer-stock movements. See the [generator guide](packages/fake-business/README.md) and [dataset card](dataset/README.md). Build locally, then export with `node scripts/export-library.mjs <output-directory>`. Publication at a dataset host and a DOI are separate from repository availability.
+The generator now exposes 100 stable three-year company configurations, a trailer-dealer archetype, opt-in source-bound staffing, invariant checks, an illustrative double-entry ledger and trailer-stock movements. See the [generator guide](packages/fake-business/README.md) and [dataset card](dataset/README.md). Build locally, then export with `node scripts/export-library.mjs <output-directory>`. The dataset is published on [Hugging Face](https://huggingface.co/datasets/teamshift-io/smb-library-v1) and [Zenodo](https://doi.org/10.5281/zenodo.23226098).

@@ -17,7 +17,6 @@ if (!outArg || !Number.isInteger(perTemplate) || perTemplate < 1) {
   throw new Error("Usage: node scripts/export-episodes.mjs <new-output-dir> [cases-per-template]");
 }
 const out = resolve(outArg);
-await mkdir(out, { recursive: false });
 
 // Trailer-dealer companies stay out of the sample.
 const EXCLUDED_INDUSTRIES = new Set(["trailer-dealer"]);
@@ -60,6 +59,8 @@ for (const { task, dataset, workflow, checksum } of cases) {
   }
 }
 const body = episodes.map((e) => JSON.stringify(e)).join("\n") + "\n";
+// Created only after every episode graded as expected, so a failed run leaves nothing behind.
+await mkdir(out, { recursive: false });
 await writeFile(join(out, "episodes.jsonl"), body, { flag: "wx" });
 await writeFile(join(out, "SHA256SUMS"), `${createHash("sha256").update(body).digest("hex")}  episodes.jsonl\n`, { flag: "wx" });
 console.log(JSON.stringify({ cases: cases.length, episodes: episodes.length, policies: ["noop", "reference"], models: "none" }));

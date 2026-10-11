@@ -8,7 +8,8 @@ Regenerate and check the file:
 
 ```bash
 pnpm build
-node scripts/export-episodes.mjs /tmp/episodes && diff /tmp/episodes/episodes.jsonl samples/episodes/episodes.jsonl
+out="$(mktemp -d)/episodes"
+node scripts/export-episodes.mjs "$out" && diff "$out/episodes.jsonl" samples/episodes/episodes.jsonl
 cd samples/episodes && sha256sum -c SHA256SUMS
 ```
 

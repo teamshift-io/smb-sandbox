@@ -11,8 +11,8 @@ environment contains today and what has been checked.
 |---|---|
 | Task templates | 13 (10 workflows plus 3 review-handoff tasks) |
 | Task instances (public corpus) | 100 across 4 industries; this sheet and the sample cover the 75 in home services, dental clinic and marketing agency |
-| Tools | 46 MCP tools across CRM, inbox, calendar, invoicing and phone; writes are validated, audited and never leave the process |
-| Grader | Deterministic, end-state; 8 to 19 named checks per template |
+| Tools | 46 MCP tools: 40 across CRM, inbox, calendar, invoicing and phone, plus 6 admin tools; writes are validated, audited and never leave the process |
+| Grader | Deterministic, end-state; 8 to 20 named checks per instance |
 | Reward | `reward` 1 only when every check passes, otherwise 0; `shaped_reward` is the fraction of checks passed |
 | Adversarial cases | 20 of 100 instances carry a seeded prompt injection in an inbound message |
 | Episode limits (native runner) | 30 steps, temperature 0, 2,048 completion tokens per step |
@@ -21,8 +21,10 @@ environment contains today and what has been checked.
 
 ## Task templates and grader coverage
 
-Checks are counted on the first public instance of each template. Every template is validated
-the same way: the untouched company fails and the reference solution scores 1.0.
+Checks and no-op rewards are counted on each template's instance in the sample, its first in-scope
+case. Other in-scope instances of a template differ by at most one check, because the check list
+follows each company's records. Every instance is validated the same way: the untouched company
+fails and the reference solution scores 1.0.
 
 | Template | Category | Checks | No-op shaped reward |
 |---|---|---:|---:|
@@ -55,10 +57,10 @@ node scripts/export-episodes.mjs ./episodes-all 25   # every in-scope case
 ```
 
 The script writes `episodes.jsonl` and `SHA256SUMS` into a new directory. Each line holds one
-episode: the case and template, industry, prompt, every tool call the policy made, and the reward
-with the grader's named checks. The two scripted policies are `noop` and `reference`. Output is
-byte-identical across runs. [`samples/episodes/`](../samples/episodes) holds the
-one-per-template export.
+episode: the case and template, industry, prompt, every state-changing tool call the policy made
+(from the audit log, which doesn't record reads), and the reward with the grader's named checks.
+The two scripted policies are `noop` and `reference`. Output is byte-identical across runs.
+[`samples/episodes/`](../samples/episodes) holds the one-per-template export.
 
 Model runs go through the native runner in [`packages/smb-bench`](../packages/smb-bench/README.md).
 It needs an evaluator's own model admission and budget, and none are included here.

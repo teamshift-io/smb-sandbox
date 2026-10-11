@@ -7,6 +7,10 @@ authors:
     website: "https://teamshift.io"
 doi: "10.5281/zenodo.23226098"
 url: "https://zenodo.org/records/23226098"
+identifiers:
+  - type: url
+    value: "https://huggingface.co/datasets/teamshift-io/smb-library-v1"
+    description: "Hugging Face mirror"
 repository-code: "https://github.com/teamshift-io/smb-sandbox"
 license: Apache-2.0
 version: "library-v1"

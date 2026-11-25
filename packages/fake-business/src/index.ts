@@ -25,4 +25,4 @@ export type { InventoryMovement, InventoryViolation } from "./inventory.js";
 export { checkFictionalNames } from "./names.js";
 export type { NameMatch } from "./names.js";
 export { CALIBRATION } from "./calibration.js";
-export type { Calibration } from "./calibration.js";
+export type { Calibration, CalibratedIndustryId } from "./calibration.js";

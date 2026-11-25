@@ -117,7 +117,7 @@ describe.each([
     expect(deals.length - 1).toBe(d.deals.length);
     const companies = parseCSV(files["companies.csv"]!);
     expect(companies[0]).toEqual(expect.arrayContaining(["Company Name", "Company Domain Name"]));
-    expect(companies.length - 1).toBe(d.company.industry === "marketing-agency" ? d.customers.length : 0);
+    expect(companies.length - 1).toBe(d.customers.some((c) => c.kind === "business") ? d.customers.length : 0);
   });
 
   it("toQuickBooksImportCSVs shapes customers and invoice lines", () => {

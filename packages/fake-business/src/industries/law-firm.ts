@@ -254,7 +254,7 @@ export const lawFirm: IndustryProfile = {
       requests: [
         "I've been offered a job with a non-compete in the contract. Can an attorney read it over before I sign?",
         "We're about to sign a lease on a house and a few clauses look odd. Could someone review it this week?",
-        "I'm buying a used camper from a private seller. Can you look over the bill of sale before I pay?",
+        "I'm buying a used fishing boat from a private seller. Can you look over the bill of sale before I pay?",
       ],
       repeatRequests: [
         "You've helped us before. I have a new lease I'd like one of your attorneys to read before I sign it.",

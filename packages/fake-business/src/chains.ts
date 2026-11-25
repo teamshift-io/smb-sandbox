@@ -38,7 +38,7 @@ function everyMonthsFor(w: World, key: string): number {
 }
 
 /** Lower-case a title's first letter for mid-sentence use, keeping acronyms ("AC system"). */
-function lc(title: string): string {
+export function lc(title: string): string {
   return /^[A-Z][A-Z]/.test(title) ? title : title.charAt(0).toLowerCase() + title.slice(1);
 }
 

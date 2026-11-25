@@ -2,6 +2,7 @@ import type { IndustryProfile } from "./types.js";
 
 export const cleaningService: IndustryProfile = {
   id: "cleaning-service",
+  planTag: "recurring-service",
   name: "Cleaning service",
   summary:
     "Residential cleaning service: households, first-time deep cleans, monthly recurring cleanings, move-out and post-construction jobs with flat-rate pricing by home size.",

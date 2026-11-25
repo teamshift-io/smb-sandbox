@@ -2,6 +2,7 @@ import type { IndustryProfile } from "./types.js";
 
 export const veterinaryClinic: IndustryProfile = {
   id: "veterinary-clinic",
+  planTag: "wellness-recall",
   name: "Veterinary clinic",
   summary:
     "Small-animal veterinary clinic: pet owners, wellness and sick visits, annual wellness recalls, and written estimates for dental and surgical procedures.",

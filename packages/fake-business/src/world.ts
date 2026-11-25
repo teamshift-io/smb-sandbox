@@ -174,7 +174,7 @@ export class World {
   }
 
   planTag(): string {
-    return this.P.id === "dental-clinic" ? "recall-6mo" : "maintenance-plan";
+    return this.P.planTag ?? (this.P.id === "dental-clinic" ? "recall-6mo" : "maintenance-plan");
   }
 
   active(roles: readonly EmployeeRole[]): Employee[] {

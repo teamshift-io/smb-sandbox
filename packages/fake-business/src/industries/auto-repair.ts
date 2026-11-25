@@ -2,6 +2,7 @@ import type { IndustryProfile } from "./types.js";
 
 export const autoRepair: IndustryProfile = {
   id: "auto-repair",
+  planTag: "service-reminders",
   name: "Auto repair shop",
   summary:
     "Independent auto repair shop: household vehicle owners, oil changes, diagnostics, brakes and tires, written estimates and 6-month maintenance reminders.",

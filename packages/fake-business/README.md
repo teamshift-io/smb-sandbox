@@ -154,13 +154,23 @@ Total: $8,505.00. Valid through Nov 19, 2025.
 | `events` | Append-only timeline of every state change (`LeadCreated`, `QuoteSent`, `JobRescheduled`, `PaymentReceived`, …) |
 | `anomalies` | Ground truth for the injected mess (see below) |
 
-Three industries ship today, each with its own services, price book, roles, policies and customer language:
+Eleven general industries ship today, each with its own services, price book, roles, policies and customer language:
 
 | `--industry` | Business | Customers | Flavor |
 | --- | --- | --- | --- |
 | `home-services` | HVAC & plumbing contractor | households | service calls, equipment installs, maintenance-plan tune-ups |
 | `dental-clinic` | General dental practice | patients | new-patient visits, 6-month hygiene recalls, treatment plans, insurance-style notes (no real PHI) |
 | `marketing-agency` | Digital marketing agency | businesses | proposals, website and brand projects with deposits, monthly retainers |
+| `auto-repair` | Independent auto repair shop | households | oil changes with service reminders, diagnostics, quoted brake, tire and suspension work |
+| `landscaping` | Landscaping and lawn care company | households | seasonal cleanups, monthly mowing agreements, quoted patio, planting and drainage projects |
+| `cleaning-service` | Residential cleaning service | households | first-time deep cleans, recurring cleanings, quoted move-out and post-construction jobs |
+| `roofing-contractor` | Residential roofing contractor | households | leak repairs and inspections, quoted roof replacements with deposits, annual maintenance visits |
+| `law-firm` | Small general-practice law firm | clients | fee agreements, estate plans, closings, consultations and hourly matters (no real cases, no legal advice) |
+| `accounting-firm` | Accounting and bookkeeping firm | businesses | engagement letters, monthly bookkeeping and payroll, tax returns, cleanup projects |
+| `veterinary-clinic` | Companion-animal veterinary clinic | pet owners | new-client visits, annual wellness recalls, estimates for dental and surgery |
+| `it-services` | Managed IT services provider | businesses | monthly managed-service plans, onboarding, network and migration projects, break-fix calls |
+
+The eight industries added after `0.1.0` are illustrative: they carry no Census/BLS calibration (`calibrated: true` and the company library cover the original set only) and reach npm with the next release.
 
 Sizes: `small` ≈ 15 customers, `medium` ≈ 40, `large` ≈ 150, over `--months` of history (default 12) ending at `--as-of` (default `2026-09-30`).
 

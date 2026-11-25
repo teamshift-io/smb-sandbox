@@ -80,6 +80,10 @@ export interface IndustryProfile {
   companyNames: readonly string[];
   companyDescription: string;
   customerKind: "household" | "business";
+  /** Customer tag for those on the recurring offering. Defaults to "maintenance-plan". */
+  planTag?: string;
+  /** Name of the first call with a new lead. Defaults to "Discovery call" (business) or "Phone assessment". */
+  consultTitle?: string;
   nouns: { quote: string; job: string; customer: string };
   quotePrefix: string;
   quoteValidDays: number;

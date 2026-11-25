@@ -9,6 +9,7 @@ import type { AnomalyKind, Contact, Invoice, LeadSource } from "./schema.js";
 import { DAY, MIN, dayStart, toDate } from "./time.js";
 import { NICKNAMES, MAIL_DOMAINS } from "./words.js";
 import { ref, usd, type World } from "./world.js";
+import { lc } from "./chains.js";
 
 export type Quotas = Readonly<Record<AnomalyKind, number>>;
 
@@ -153,7 +154,7 @@ export function injectPostAnomalies(w: World, plan: Plan, rng: Rng, quotas: Quot
     w.anomaly(
       "lead-never-contacted",
       [lead.id, contact.id, msg.id],
-      `${source === "web-form" ? "Web-form" : source === "google-ads" ? "Google Ads" : "Email"} lead from ${contact.firstName} ${contact.lastName} on ${toDate(t)} about ${offering.title.charAt(0).toLowerCase() + offering.title.slice(1)} has never been contacted${owner ? "" : " and has no owner"}.`,
+      `${source === "web-form" ? "Web-form" : source === "google-ads" ? "Google Ads" : "Email"} lead from ${contact.firstName} ${contact.lastName} on ${toDate(t)} about ${lc(offering.title)} has never been contacted${owner ? "" : " and has no owner"}.`,
       null,
     );
     }
@@ -214,7 +215,7 @@ export function injectPostAnomalies(w: World, plan: Plan, rng: Rng, quotas: Quot
       w.anomaly(
         "unmatched-payment",
         [pay.id, inv.id],
-        `A ${pay.method} payment of ${usd(pay.amountCents)} received ${pay.receivedAt.slice(0, 10)} (ref "${pay.reference}") is not linked to any invoice; it most likely pays ${ref(inv.id)} for ${customers.get(inv.customerId)?.name}, which still shows ${usd(inv.totalCents - inv.paidCents)} unpaid.`,
+        `${pay.method === "ach" ? "An ACH" : `A ${pay.method}`} payment of ${usd(pay.amountCents)} received ${pay.receivedAt.slice(0, 10)} (ref "${pay.reference}") is not linked to any invoice; it most likely pays ${ref(inv.id)} for ${customers.get(inv.customerId)?.name}, which still shows ${usd(inv.totalCents - inv.paidCents)} unpaid.`,
         pay.amountCents,
       );
     }

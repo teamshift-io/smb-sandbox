@@ -62,7 +62,7 @@ describe.each(IDS)("%s dataset", (industry) => {
         expect(d.customers.length).toBeGreaterThanOrEqual(32);
         expect(d.customers.length).toBeLessThanOrEqual(48);
         expect(d.company.industry).toBe(industry);
-        expect(d.customers.every((c) => c.kind === (industry === "marketing-agency" ? "business" : "household"))).toBe(true);
+        expect(d.customers.every((c) => c.kind === PROFILES[industry].customerKind)).toBe(true);
         expect(d.quotes.length).toBeGreaterThan(0);
         expect(d.jobs.length).toBeGreaterThan(0);
         expect(d.invoices.length).toBeGreaterThan(0);
@@ -259,7 +259,7 @@ describe.each(IDS)("%s dataset", (industry) => {
           }
           for (const ev of d.events.filter((e) => e.type === "JobRescheduled")) {
             const job = d.jobs.find((j) => j.id === ev.subjectId)!;
-            const task = d.tasks.find((t) => t.relatedIds.includes(job.id) && t.title.startsWith(industry === "marketing-agency" ? "Meeting" : "Visit"))!;
+            const task = d.tasks.find((t) => t.relatedIds.includes(job.id) && t.title.startsWith(PROFILES[industry].customerKind === "business" ? "Meeting" : "Visit"))!;
             expect(task.dueOn).toBe(job.scheduledStart.slice(0, 10));
           }
           for (const c of d.contacts) {

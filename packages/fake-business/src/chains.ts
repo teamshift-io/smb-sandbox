@@ -38,7 +38,7 @@ function everyMonthsFor(w: World, key: string): number {
 }
 
 /** Lower-case a title's first letter for mid-sentence use, keeping acronyms ("AC system"). */
-function lc(title: string): string {
+export function lc(title: string): string {
   return /^[A-Z][A-Z]/.test(title) ? title : title.charAt(0).toLowerCase() + title.slice(1);
 }
 
@@ -148,7 +148,7 @@ function runLead(c: Chain, plan: LeadPlan): void {
 
   // Consultation call, then the deal.
   const t2 = c.step(c.clock.staffAfter(tResp, 45, 60 * 24 * 2, rng));
-  const consult = P.customerKind === "business" ? "Discovery call" : P.id === "dental-clinic" ? "Phone consult" : "Phone assessment";
+  const consult = P.consultTitle ?? (P.customerKind === "business" ? "Discovery call" : P.id === "dental-clinic" ? "Phone consult" : "Phone assessment");
   w.call({
     direction: "outbound",
     t: t2,

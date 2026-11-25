@@ -1,4 +1,4 @@
-import { CALIBRATION, calibratedProfile } from "./calibration.js";
+import { calibratedProfile, calibrationFor } from "./calibration.js";
 import { injectPostAnomalies, type Quotas } from "./anomalies.js";
 import { runChain } from "./chains.js";
 import { PROFILES } from "./industries/index.js";
@@ -50,6 +50,7 @@ function resolve(opts: GenerateOptions): Resolved {
   const messiness = opts.messiness ?? 1;
   if (!Number.isFinite(messiness) || messiness < 0 || messiness > 10) throw new RangeError(`messiness must be between 0 and 10, got ${String(messiness)}`);
   if (opts.calibrated !== undefined && typeof opts.calibrated !== "boolean") throw new TypeError("calibrated must be boolean");
+  if (opts.calibrated) calibrationFor(opts.industry);
   return { industry: opts.industry, seed: opts.seed, size, asOf, months, messiness, calibrated: opts.calibrated ?? false };
 }
 
@@ -167,7 +168,7 @@ function finalize(w: World, plan: Plan, r: Resolved): Dataset {
       startDate: plan.startDate,
       asOf: r.asOf,
       synthetic: true,
-      ...(r.calibrated ? { calibration: structuredClone(CALIBRATION[r.industry]) } : {}),
+      ...(r.calibrated ? { calibration: structuredClone(calibrationFor(r.industry)) } : {}),
     },
     company: w.company,
     employees: d.employees,

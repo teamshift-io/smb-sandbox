@@ -3,6 +3,14 @@ import { dentalClinic } from "./dental-clinic.js";
 import { homeServices } from "./home-services.js";
 import { marketingAgency } from "./marketing-agency.js";
 import { trailerDealer } from "./trailer-dealer.js";
+import { autoRepair } from "./auto-repair.js";
+import { landscaping } from "./landscaping.js";
+import { lawFirm } from "./law-firm.js";
+import { accountingFirm } from "./accounting-firm.js";
+import { veterinaryClinic } from "./veterinary-clinic.js";
+import { cleaningService } from "./cleaning-service.js";
+import { roofingContractor } from "./roofing-contractor.js";
+import { itServices } from "./it-services.js";
 import type { IndustryProfile } from "./types.js";
 
 /** Every industry is one profile file; add yours here. */
@@ -11,6 +19,14 @@ export const PROFILES: Readonly<Record<IndustryId, IndustryProfile>> = {
   "dental-clinic": dentalClinic,
   "marketing-agency": marketingAgency,
   "trailer-dealer": trailerDealer,
+  "auto-repair": autoRepair,
+  "landscaping": landscaping,
+  "law-firm": lawFirm,
+  "accounting-firm": accountingFirm,
+  "veterinary-clinic": veterinaryClinic,
+  "cleaning-service": cleaningService,
+  "roofing-contractor": roofingContractor,
+  "it-services": itServices,
 };
 
 export interface IndustryInfo {

@@ -23,7 +23,7 @@ describe("ready-made three-year company library", () => {
     for (const entry of COMPANY_LIBRARY) {
       expect(checkInvariants(generateCompany(entry.id)).violations.filter((issue) => issue.rule === "staff-overlap"), entry.id).toEqual([]);
     }
-  });
+  }, 60_000);
 
   it("rejects unknown library IDs rather than silently selecting another company", () => {
     expect(() => generateCompany("company-missing")).toThrow(/Unknown company/);

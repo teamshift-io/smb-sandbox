@@ -14,7 +14,7 @@ Agents that look great in a demo often fall apart on a real company's messy data
 | [`@teamshift/sandbox-mcp`](packages/sandbox-mcp) | 46 MCP tools over that business (CRM, inbox, calendar, invoicing, phone). Writes are validated, audited, and never leave the process. Sending email only writes to an outbox. | `claude mcp add sandbox -- npx -y @teamshift/sandbox-mcp` |
 | [`@teamshift/smb-workflows`](workflows) | 10 real small-business tasks (quote follow-up, missed-call callbacks, invoice reminders, duplicate cleanup and more), each with a deterministic verifier and a reference solution. | `npx @teamshift/smb-workflows list` |
 
-Three starter industries: **home services** (HVAC and plumbing), **dental clinic**, and **marketing agency**. Each seed is a different company with the same kinds of problems.
+Eleven general industries: **home services** (HVAC and plumbing), **dental clinic**, **marketing agency**, **auto repair**, **landscaping**, **cleaning service**, **roofing contractor**, **law firm**, **accounting firm**, **veterinary clinic** and **IT services**. Each seed is a different company with the same kinds of problems.
 
 ## Evaluate an agent in three commands
 

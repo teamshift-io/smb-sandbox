@@ -16,7 +16,19 @@ import type { Calibration } from "./calibration.js";
 
 export const SCHEMA_VERSION = "1.0.0";
 
-export type IndustryId = "home-services" | "dental-clinic" | "marketing-agency" | "trailer-dealer";
+export type IndustryId =
+  | "home-services"
+  | "dental-clinic"
+  | "marketing-agency"
+  | "trailer-dealer"
+  | "auto-repair"
+  | "landscaping"
+  | "law-firm"
+  | "accounting-firm"
+  | "veterinary-clinic"
+  | "cleaning-service"
+  | "roofing-contractor"
+  | "it-services";
 
 export type Iso = string;
 export type IsoDate = string;
@@ -100,7 +112,17 @@ export type EmployeeRole =
   | "front-desk"
   | "account-manager"
   | "designer"
-  | "strategist";
+  | "strategist"
+  | "service-advisor"
+  | "crew-lead"
+  | "estimator"
+  | "attorney"
+  | "paralegal"
+  | "accountant"
+  | "veterinarian"
+  | "vet-tech"
+  | "cleaner"
+  | "engineer";
 
 export interface Employee {
   id: string; // emp_

@@ -1,4 +1,5 @@
 import type { Dataset } from "../schema.js";
+import { PROFILES } from "../industries/index.js";
 import { TABLES, type Column } from "./tables.js";
 
 /** Pretty-printed JSON with a trailing newline. Byte-identical for identical input. */
@@ -112,7 +113,7 @@ export function toHubSpotImportCSVs(dataset: Dataset): Record<string, string> {
   const employees = new Map(dataset.employees.map((e) => [e.id, e]));
   const customers = new Map(dataset.customers.map((c) => [c.id, c]));
   const contacts = new Map(dataset.contacts.map((c) => [c.id, c]));
-  const business = dataset.company.industry === "marketing-agency";
+  const business = PROFILES[dataset.company.industry].customerKind === "business";
   const stageByCustomer = new Map<string, string>();
   for (const d of dataset.deals) {
     const prev = stageByCustomer.get(d.customerId);

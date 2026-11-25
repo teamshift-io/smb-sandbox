@@ -26,7 +26,10 @@ function profile(naics: string, employees: number, establishments: number, firms
   };
 }
 
-export const CALIBRATION: Readonly<Record<IndustryId, Calibration>> = {
+/** Industries with recorded Census/BLS references. The others are illustrative only. */
+export type CalibratedIndustryId = "home-services" | "dental-clinic" | "marketing-agency" | "trailer-dealer";
+
+export const CALIBRATION: Readonly<Record<CalibratedIndustryId, Calibration>> = {
   "home-services": profile("238220", 1214761, 111207, 107004, 96222, "238220", "49-9021", 2620),
   "dental-clinic": profile("621210", 1028889, 135665, 120488, 113495, "621200", "31-9091", 2239),
   "marketing-agency": profile("541810", 200465, 15512, 13682, 12411, "541800", "13-1161", 3148, true),
@@ -36,8 +39,14 @@ CALIBRATION["trailer-dealer"].limitations += " CBP/SUSB use 2017 NAICS441228; ut
 CALIBRATION["marketing-agency"].limitations += " OEWS541800 includes advertising, public relations and related services, broader than Census541810.";
 
 /** Adjust only the largest medium role; preserve the profile's roles and every other size. */
+export function calibrationFor(industry: IndustryId): Calibration {
+  const calibration = (CALIBRATION as Partial<Record<IndustryId, Calibration>>)[industry];
+  if (!calibration) throw new RangeError(`No calibration is recorded for industry "${industry}". Calibrated industries: ${Object.keys(CALIBRATION).join(", ")}`);
+  return calibration;
+}
+
 export function calibratedProfile(profile: IndustryProfile): IndustryProfile {
-  const target = Math.round(CALIBRATION[profile.id].cbp.employeesPerEstablishment);
+  const target = Math.round(calibrationFor(profile.id).cbp.employeesPerEstablishment);
   const total = profile.roster.reduce((sum, role) => sum + role.medium, 0);
   const largest = profile.roster.reduce((best, role, index) => role.medium > profile.roster[best]!.medium ? index : best, 0);
   const roster = profile.roster.map((role, index) => index === largest ? { ...role, medium: role.medium + target - total } : { ...role });
